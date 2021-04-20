@@ -1,0 +1,35 @@
+// círculo
+
+while (VERDADERO) {
+
+   Medido = FALSO;
+
+   DMA_DAR0 = ( uint32_t ) & MeasuredValues;
+
+   DMA_SAR1 = ( uint32_t ) & ChannelsCfg2;
+
+   DMA_SAR2 = ( uint32_t ) & ChannelsCfg;
+
+   DMA_DSR_BCR0 = ADC_CHANNELS_COUNT * 2;
+
+   DMA_DSR_BCR1 = ADC_CHANNELS_COUNT + 1;
+
+   DMA_DSR_BCR2 = ADC_CHANNELS_COUNT + 1;
+
+   DMA_DCR1 | = DMA_DCR_START_MASK;
+   
+  while (! Measured) {} 
+
+  para (i = 0; i <ADC_CHANNELS_COUNT; i ++) {
+
+    printf ( "% 7u" , ( uint16_t ) MeasuredValues ​​[i]);
+
+  }   
+
+  printf ( "\ n" );
+
+  TU1_ResetCounter (TU1_DeviceData);
+
+  while (TU1_GetCounterValue (TU1_DeviceData) <50000) {}
+
+}
